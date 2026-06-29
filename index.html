@@ -442,6 +442,35 @@
     margin-top: 6px;
   }
 
+  .cart-notes-box {
+    margin-top: 14px;
+  }
+
+  .cart-notes-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .cart-notes-input {
+    width: 100%;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--ink);
+    resize: vertical;
+  }
+
+  .cart-notes-input:focus {
+    outline: none;
+    border-color: var(--flame);
+  }
+
   .checkout-btn {
     width: 100%;
     background: var(--ink);
@@ -749,6 +778,10 @@
         <span>الإجمالي</span>
         <span id="cartModalTotal">0 ج.م</span>
       </div>
+      <div class="cart-notes-box" id="cartNotesBox" style="display:none;">
+        <label for="cartNotes" class="cart-notes-label">ملاحظات على الطلب (اختياري)</label>
+        <textarea id="cartNotes" class="cart-notes-input" placeholder="مثلاً: من غير بصل، حار زيادة، حد الأطباق منفصل..." rows="2"></textarea>
+      </div>
       <button class="checkout-btn" id="checkoutBtn" style="display:none;">تأكيد الطلب</button>
     </div>
   </div>
@@ -820,11 +853,13 @@
       // تحديث نافذة التفاصيل
       var linesContainer = document.getElementById('cartLines');
       var totalRow = document.getElementById('cartTotalRow');
+      var notesBox = document.getElementById('cartNotesBox');
       var checkoutBtn = document.getElementById('checkoutBtn');
 
       if (totalCount === 0) {
         linesContainer.innerHTML = '<p class="cart-empty-msg">الطلب لسه فاضي. ضيف حاجة من المنيو!</p>';
         totalRow.style.display = 'none';
+        notesBox.style.display = 'none';
         checkoutBtn.style.display = 'none';
         return;
       }
@@ -849,6 +884,7 @@
       linesContainer.innerHTML = html;
       totalRow.style.display = 'flex';
       document.getElementById('cartModalTotal').textContent = totalPrice + ' ج.م';
+      notesBox.style.display = 'block';
       checkoutBtn.style.display = 'block';
     }
 
@@ -872,8 +908,12 @@
         document.getElementById('tableInput').focus();
         return;
       }
-      alert('تم تأكيد طلبك! طاولة رقم ' + tableNumber + '. الإجمالي: ' + getTotalPrice() + ' ج.م. شكراً لطلبك من Adam\'s Restaurant 🎉');
+      var notesInput = document.getElementById('cartNotes');
+      var notes = notesInput.value.trim();
+      var notesMsg = notes ? ('\nملاحظات: ' + notes) : '';
+      alert('تم تأكيد طلبك! طاولة رقم ' + tableNumber + '. الإجمالي: ' + getTotalPrice() + ' ج.م.' + notesMsg + '\nشكراً لطلبك من Adam\'s Restaurant 🎉');
       cart = {};
+      notesInput.value = '';
       renderCart();
       document.getElementById('cartOverlay').classList.remove('visible');
     });
