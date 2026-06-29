@@ -64,6 +64,76 @@
     margin: 0;
   }
 
+  /* ---------- TABLE NUMBER BOX ---------- */
+  .table-box {
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: 16px;
+    margin: -18px 20px 0;
+    padding: 16px 18px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .table-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .table-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .table-input {
+    flex: 1;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 16px;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--ink);
+    min-width: 0;
+  }
+
+  .table-input:focus {
+    outline: none;
+    border-color: var(--flame);
+  }
+
+  .table-confirm-btn {
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .table-confirm-btn:hover {
+    background: var(--flame);
+  }
+
+  .table-confirm-btn.confirmed {
+    background: #2e8b57;
+  }
+
+  .table-msg {
+    margin: 10px 0 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #2e8b57;
+    min-height: 16px;
+  }
+
   /* ---------- CATEGORY NAV ---------- */
   .cat-nav {
     display: flex;
@@ -396,6 +466,16 @@
     </h1>
     <p class="hero-sub">بيتزا طرية، برجر طازة، وبطاطس مقرمشة بتوصلك في نص ساعة.</p>
   </header>
+
+  <!-- ===== خانة رقم الطاولة ===== -->
+  <section class="table-box">
+    <label for="tableInput" class="table-label">رقم الطاولة</label>
+    <div class="table-row">
+      <input type="text" id="tableInput" class="table-input" placeholder="مثلاً: 5" inputmode="numeric">
+      <button id="tableConfirmBtn" class="table-confirm-btn">تأكيد</button>
+    </div>
+    <p class="table-msg" id="tableMsg"></p>
+  </section>
 
   <!-- ===== CATEGORY NAV ===== -->
   <nav class="cat-nav">
@@ -754,13 +834,40 @@
 
     // تأكيد الطلب (تجريبي - تقدر تغيره بعدين لربطه بواتساب أو غيره)
     document.getElementById('checkoutBtn').addEventListener('click', function () {
-      alert('تم تأكيد طلبك! الإجمالي: ' + getTotalPrice() + ' ج.م. شكراً لطلبك من Adam\'s Restaurant 🎉');
+      var tableMsg = tableNumber ? ('طاولة رقم ' + tableNumber + '. ') : '';
+      alert('تم تأكيد طلبك! ' + tableMsg + 'الإجمالي: ' + getTotalPrice() + ' ج.م. شكراً لطلبك من Adam\'s Restaurant 🎉');
       cart = {};
       renderCart();
       document.getElementById('cartOverlay').classList.remove('visible');
     });
 
     renderCart();
+
+    /* ---------- رقم الطاولة ---------- */
+    var tableNumber = '';
+
+    document.getElementById('tableConfirmBtn').addEventListener('click', function () {
+      var input = document.getElementById('tableInput');
+      var msg = document.getElementById('tableMsg');
+      var btn = document.getElementById('tableConfirmBtn');
+      var value = input.value.trim();
+
+      if (value === '') {
+        msg.style.color = '#ff4d12';
+        msg.textContent = 'من فضلك اكتب رقم الطاولة الأول';
+        return;
+      }
+
+      tableNumber = value;
+      msg.style.color = '#2e8b57';
+      msg.textContent = 'تم تسجيل طاولة رقم ' + tableNumber + ' ✓';
+      btn.classList.add('confirmed');
+      btn.textContent = 'تم ✓';
+      setTimeout(function () {
+        btn.classList.remove('confirmed');
+        btn.textContent = 'تأكيد';
+      }, 1200);
+    });
   </script>
 
 </body>
