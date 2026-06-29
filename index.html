@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -834,8 +834,14 @@
 
     // تأكيد الطلب (تجريبي - تقدر تغيره بعدين لربطه بواتساب أو غيره)
     document.getElementById('checkoutBtn').addEventListener('click', function () {
-      var tableMsg = tableNumber ? ('طاولة رقم ' + tableNumber + '. ') : '';
-      alert('تم تأكيد طلبك! ' + tableMsg + 'الإجمالي: ' + getTotalPrice() + ' ج.م. شكراً لطلبك من Adam\'s Restaurant 🎉');
+      if (!tableNumber) {
+        var msg = document.getElementById('tableMsg');
+        msg.style.color = '#ff4d12';
+        msg.textContent = 'سجّل رقم طاولتك الأول (من 1 لحد 20) قبل تأكيد الطلب';
+        document.getElementById('tableInput').focus();
+        return;
+      }
+      alert('تم تأكيد طلبك! طاولة رقم ' + tableNumber + '. الإجمالي: ' + getTotalPrice() + ' ج.م. شكراً لطلبك من Adam\'s Restaurant 🎉');
       cart = {};
       renderCart();
       document.getElementById('cartOverlay').classList.remove('visible');
@@ -851,14 +857,16 @@
       var msg = document.getElementById('tableMsg');
       var btn = document.getElementById('tableConfirmBtn');
       var value = input.value.trim();
+      var num = Number(value);
 
-      if (value === '') {
+      if (value === '' || !Number.isInteger(num) || num < 1 || num > 20) {
         msg.style.color = '#ff4d12';
-        msg.textContent = 'من فضلك اكتب رقم الطاولة الأول';
+        msg.textContent = 'من فضلك اكتب رقم طاولة صحيح من 1 لحد 20';
+        tableNumber = '';
         return;
       }
 
-      tableNumber = value;
+      tableNumber = String(num);
       msg.style.color = '#2e8b57';
       msg.textContent = 'تم تسجيل طاولة رقم ' + tableNumber + ' ✓';
       btn.classList.add('confirmed');
