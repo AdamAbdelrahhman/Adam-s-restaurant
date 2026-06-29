@@ -83,16 +83,11 @@
     font-size: 14px;
     cursor: pointer;
     white-space: nowrap;
+    text-decoration: none;
   }
 
   .cat-btn:hover {
     border-color: var(--flame);
-  }
-
-  .cat-btn.active {
-    background: var(--ink);
-    color: var(--bg);
-    border-color: var(--ink);
   }
 
   /* ---------- MENU SECTIONS ---------- */
@@ -117,19 +112,39 @@
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 18px;
+    overflow: hidden;
+  }
+
+  /* ---------- IMAGE PLACEHOLDER ----------
+     دي صورة توضيحية بإيموجي كبير على خلفية متدرجة.
+     لو عايز تضيف صورتك الحقيقية بعدين:
+     1. ضيف الصورة في نفس فولدر الموقع (مثلاً: images/pizza1.jpg)
+     2. بدّل الـ <div class="menu-card-img">...</div>
+        بـ <img class="menu-card-img" src="images/pizza1.jpg" alt="اسم الأكلة">
+  ------------------------------------------ */
+  .menu-card-img {
+    width: 100%;
+    height: 150px;
+    display: block;
+    object-fit: cover;
+    background: var(--line);
+  }
+
+  .menu-card-body {
+    padding: 14px 18px;
   }
 
   .menu-tag {
     position: absolute;
-    top: -10px;
-    right: 14px;
+    top: 12px;
+    right: 12px;
     background: var(--flame);
     color: white;
     font-size: 11px;
     font-weight: bold;
     padding: 4px 10px;
     border-radius: 999px;
+    z-index: 2;
   }
 
   .menu-card-name {
@@ -149,7 +164,19 @@
   .menu-card-bottom {
     display: flex;
     align-items: center;
+    padding: 0 18px 18px;
+  }
+
+  .menu-card-price {
+    font-weight: 800;
+    font-size: 16px;
+  }
+
+  .menu-card-bottom {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
+    padding: 0 18px 18px;
   }
 
   .menu-card-price {
@@ -172,6 +199,10 @@
     background: var(--flame);
   }
 
+  .add-btn.added {
+    background: #2e8b57;
+  }
+
   /* ---------- FOOTER ---------- */
   footer {
     text-align: center;
@@ -180,7 +211,179 @@
     font-size: 13px;
   }
 
+  /* ---------- CART BAR (شريط الطلب الثابت تحت) ---------- */
+  .cart-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--ink);
+    color: var(--bg);
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    cursor: pointer;
+    z-index: 50;
+    box-shadow: 0 -8px 24px rgba(0,0,0,0.25);
+  }
+
+  .cart-bar.visible {
+    display: flex;
+  }
+
+  .cart-bar-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 14px;
+  }
+
+  .cart-bar-count {
+    background: var(--flame);
+    color: white;
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 13px;
+  }
+
+  .cart-bar-total {
+    font-weight: 800;
+    font-size: 16px;
+  }
+
+  /* ---------- CART MODAL (تفاصيل الطلب) ---------- */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(22,19,18,0.55);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 60;
+  }
+
+  .cart-overlay.visible {
+    display: flex;
+  }
+
+  .cart-modal {
+    background: var(--bg);
+    width: 100%;
+    max-width: 480px;
+    max-height: 80vh;
+    border-radius: 24px 24px 0 0;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .cart-modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .cart-modal-head h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  .cart-close-btn {
+    border: none;
+    background: var(--paper);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .cart-empty-msg {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 0;
+  }
+
+  .cart-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--paper);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+  }
+
+  .cart-line-name {
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 0 2px;
+  }
+
+  .cart-line-price {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .cart-line-qty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 6px;
+  }
+
+  .cart-line-qty button {
+    border: none;
+    background: var(--paper);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .cart-line-qty span {
+    min-width: 16px;
+    text-align: center;
+    font-weight: 800;
+  }
+
+  .cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 800;
+    font-size: 17px;
+    border-top: 1.5px dashed var(--line);
+    padding-top: 14px;
+    margin-top: 6px;
+  }
+
+  .checkout-btn {
+    width: 100%;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    border-radius: 999px;
+    padding: 14px;
+    font-weight: 800;
+    font-size: 15px;
+    margin-top: 14px;
+    cursor: pointer;
+  }
+
+  .checkout-btn:hover {
+    background: var(--flame);
+  }
+
 </style>
+
 </head>
 <body>
 
@@ -194,7 +397,7 @@
     <p class="hero-sub">بيتزا طرية، برجر طازة، وبطاطس مقرمشة بتوصلك في نص ساعة.</p>
   </header>
 
-  <!-- ===== CATEGORY NAV (روابط بتنقلك لكل قسم في الصفحة) ===== -->
+  <!-- ===== CATEGORY NAV ===== -->
   <nav class="cat-nav">
     <a href="#pizza" class="cat-btn">🍕 بيتزا</a>
     <a href="#burger" class="cat-btn">🍔 برجر</a>
@@ -208,38 +411,50 @@
     <h2 class="section-title" id="pizza">🍕 بيتزا</h2>
     <div class="menu-grid">
 
-      <div class="menu-card">
+      <div class="menu-card" data-name="بيتزا بيبروني" data-price="220">
         <span class="menu-tag">الأكتر طلباً</span>
-        <h3 class="menu-card-name">بيتزا بيبروني</h3>
-        <p class="menu-card-desc">صوص طماطم مركز، جبنة موزاريلا، شرائح بيبروني حارة</p>
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1506354666786-959d6d497f1a?w=400&h=300&fit=crop" alt="بيتزا بيبروني">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">بيتزا بيبروني</h3>
+          <p class="menu-card-desc">صوص طماطم مركز، جبنة موزاريلا، شرائح بيبروني حارة</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">220 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">بيتزا خضار</h3>
-        <p class="menu-card-desc">فلفل ألوان، فطر، زيتون، ذرة، جبنة موزاريلا</p>
+      <div class="menu-card" data-name="بيتزا خضار" data-price="190">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1551978129-b73f45d132eb?w=400&h=300&fit=crop" alt="بيتزا خضار">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">بيتزا خضار</h3>
+          <p class="menu-card-desc">فلفل ألوان، فطر، زيتون، ذرة، جبنة موزاريلا</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">190 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">بيتزا فور تشيز</h3>
-        <p class="menu-card-desc">موزاريلا، شيدر، بارميزان، جبنة زرقاء</p>
+      <div class="menu-card" data-name="بيتزا فور تشيز" data-price="240">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop" alt="بيتزا فور تشيز">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">بيتزا فور تشيز</h3>
+          <p class="menu-card-desc">موزاريلا، شيدر، بارميزان، جبنة زرقاء</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">240 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-name="بيتزا سوبر سوبريم" data-price="260">
         <span class="menu-tag">جديد</span>
-        <h3 class="menu-card-name">بيتزا سوبر سوبريم</h3>
-        <p class="menu-card-desc">لحم مفروم، سجق، فلفل، بصل، زيتون، موزاريلا</p>
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1566843972142-a7fcb70de55a?w=400&h=300&fit=crop" alt="بيتزا سوبر سوبريم">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">بيتزا سوبر سوبريم</h3>
+          <p class="menu-card-desc">لحم مفروم، سجق، فلفل، بصل، زيتون، موزاريلا</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">260 ج.م</span>
           <button class="add-btn">إضافة</button>
@@ -252,38 +467,50 @@
     <h2 class="section-title" id="burger">🍔 برجر</h2>
     <div class="menu-grid">
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">كلاسيك تشيز برجر</h3>
-        <p class="menu-card-desc">قرص لحم 150ج، جبنة شيدر، خس، طماطم، صوص خاص</p>
+      <div class="menu-card" data-name="كلاسيك تشيز برجر" data-price="145">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1564849012987-56a988d14596?w=400&h=300&fit=crop" alt="كلاسيك تشيز برجر">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">كلاسيك تشيز برجر</h3>
+          <p class="menu-card-desc">قرص لحم 150ج، جبنة شيدر، خس، طماطم، صوص خاص</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">145 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-name="سبايسي برجر" data-price="160">
         <span class="menu-tag">حار 🔥</span>
-        <h3 class="menu-card-name">سبايسي برجر</h3>
-        <p class="menu-card-desc">قرص لحم متبل، جبنة بيبر جاك، صوص هاريسا حار</p>
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1606131731446-5568d87113aa?w=400&h=300&fit=crop" alt="سبايسي برجر">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">سبايسي برجر</h3>
+          <p class="menu-card-desc">قرص لحم متبل، جبنة بيبر جاك، صوص هاريسا حار</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">160 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-name="دبل ستاك برجر" data-price="195">
         <span class="menu-tag">الأكتر طلباً</span>
-        <h3 class="menu-card-name">دبل ستاك برجر</h3>
-        <p class="menu-card-desc">قرصين لحم، دبل جبنة، بصل مكرمل، صوص باربيكيو</p>
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=300&fit=crop" alt="دبل ستاك برجر">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">دبل ستاك برجر</h3>
+          <p class="menu-card-desc">قرصين لحم، دبل جبنة، بصل مكرمل، صوص باربيكيو</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">195 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">تشيكن كرسبي برجر</h3>
-        <p class="menu-card-desc">فراخ مقرمشة، كول سلو، مايونيز ثوم</p>
+      <div class="menu-card" data-name="تشيكن كرسبي برجر" data-price="150">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=300&fit=crop" alt="تشيكن كرسبي برجر">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">تشيكن كرسبي برجر</h3>
+          <p class="menu-card-desc">فراخ مقرمشة، كول سلو، مايونيز ثوم</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">150 ج.م</span>
           <button class="add-btn">إضافة</button>
@@ -296,36 +523,48 @@
     <h2 class="section-title" id="sides">🍟 سايدز</h2>
     <div class="menu-grid">
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">بطاطس كلاسيك</h3>
-        <p class="menu-card-desc">بطاطس مقرمشة مع رشة ملح وبهارات خاصة</p>
+      <div class="menu-card" data-name="بطاطس كلاسيك" data-price="55">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop" alt="بطاطس كلاسيك">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">بطاطس كلاسيك</h3>
+          <p class="menu-card-desc">بطاطس مقرمشة مع رشة ملح وبهارات خاصة</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">55 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">بطاطس بيري بيري</h3>
-        <p class="menu-card-desc">بطاطس متبلة بصوص بيري بيري الحار</p>
+      <div class="menu-card" data-name="بطاطس بيري بيري" data-price="65">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1639024471283-03518883512d?w=400&h=300&fit=crop" alt="بطاطس بيري بيري">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">بطاطس بيري بيري</h3>
+          <p class="menu-card-desc">بطاطس متبلة بصوص بيري بيري الحار</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">65 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">أونيون رينجز</h3>
-        <p class="menu-card-desc">حلقات بصل مقرمشة مع صوص رانش</p>
+      <div class="menu-card" data-name="أونيون رينجز" data-price="70">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1630825533949-74f62f54553a?w=400&h=300&fit=crop" alt="أونيون رينجز">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">أونيون رينجز</h3>
+          <p class="menu-card-desc">حلقات بصل مقرمشة مع صوص رانش</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">70 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">ناجتس فراخ (6 قطع)</h3>
-        <p class="menu-card-desc">ناجتس فراخ مقرمش مع صوص باربيكيو</p>
+      <div class="menu-card" data-name="ناجتس فراخ (6 قطع)" data-price="85">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1751698106460-80ed4d165984?w=400&h=300&fit=crop" alt="ناجتس فراخ">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">ناجتس فراخ (6 قطع)</h3>
+          <p class="menu-card-desc">ناجتس فراخ مقرمش مع صوص باربيكيو</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">85 ج.م</span>
           <button class="add-btn">إضافة</button>
@@ -338,27 +577,36 @@
     <h2 class="section-title" id="drinks">🥤 مشروبات</h2>
     <div class="menu-grid">
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">بيبسي / سبرايت / فانتا</h3>
-        <p class="menu-card-desc">مشروب غازي 330 مل</p>
+      <div class="menu-card" data-name="بيبسي / سبرايت / فانتا" data-price="25">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1567705323043-d0e489de300d?w=400&h=300&fit=crop" alt="بيبسي / سبرايت / فانتا">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">بيبسي / سبرايت / فانتا</h3>
+          <p class="menu-card-desc">مشروب غازي 330 مل</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">25 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">عصير فراولة طبيعي</h3>
-        <p class="menu-card-desc">فراولة طازة مع شوية نعناع</p>
+      <div class="menu-card" data-name="عصير فراولة طبيعي" data-price="45">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1614707585284-9cb9fc018387?w=400&h=300&fit=crop" alt="عصير فراولة طبيعي">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">عصير فراولة طبيعي</h3>
+          <p class="menu-card-desc">فراولة طازة مع شوية نعناع</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">45 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card">
-        <h3 class="menu-card-name">ميلك شيك شوكولاتة</h3>
-        <p class="menu-card-desc">ميلك شيك كريمي بالشوكولاتة مع كريمة</p>
+      <div class="menu-card" data-name="ميلك شيك شوكولاتة" data-price="60">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1653085315536-1379bc836161?w=400&h=300&fit=crop" alt="ميلك شيك شوكولاتة">
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">ميلك شيك شوكولاتة</h3>
+          <p class="menu-card-desc">ميلك شيك كريمي بالشوكولاتة مع كريمة</p>
+        </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">60 ج.م</span>
           <button class="add-btn">إضافة</button>
@@ -369,9 +617,151 @@
 
   </main>
 
+  <!-- ===== شريط الطلب الثابت تحت ===== -->
+  <div class="cart-bar" id="cartBar">
+    <div class="cart-bar-info">
+      <span class="cart-bar-count" id="cartCount">0</span>
+      <span>عرض الطلب</span>
+    </div>
+    <span class="cart-bar-total" id="cartBarTotal">0 ج.م</span>
+  </div>
+
+  <!-- ===== نافذة تفاصيل الطلب ===== -->
+  <div class="cart-overlay" id="cartOverlay">
+    <div class="cart-modal" onclick="event.stopPropagation()">
+      <div class="cart-modal-head">
+        <h2>طلبك</h2>
+        <button class="cart-close-btn" id="closeCartBtn">✕</button>
+      </div>
+      <div id="cartLines"></div>
+      <div class="cart-total-row" id="cartTotalRow" style="display:none;">
+        <span>الإجمالي</span>
+        <span id="cartModalTotal">0 ج.م</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn" style="display:none;">تأكيد الطلب</button>
+    </div>
+  </div>
+
   <footer>
     Adam's Restaurant © 2026 — كل الحقوق محفوظة
   </footer>
+  <script>
+    // الكارت بيتخزن هنا: object فيه اسم الصنف كـ key، وعدد القطع كـ value
+    var cart = {};
+    // عشان نعرف سعر كل صنف برقمه، نعمل object تاني فيه الاسم والسعر
+    var prices = {};
+
+    // نجيب كل الكروت في الصفحة
+    var cards = document.querySelectorAll('.menu-card');
+
+    cards.forEach(function (card) {
+      var name = card.getAttribute('data-name');
+      var price = parseInt(card.getAttribute('data-price'), 10);
+      prices[name] = price;
+
+      var btn = card.querySelector('.add-btn');
+      btn.addEventListener('click', function () {
+        addToCart(name);
+        // تأثير بصري بسيط لما تدوس "إضافة"
+        btn.classList.add('added');
+        btn.textContent = 'تمت ✓';
+        setTimeout(function () {
+          btn.classList.remove('added');
+          btn.textContent = 'إضافة';
+        }, 700);
+      });
+    });
+
+    function addToCart(name) {
+      cart[name] = (cart[name] || 0) + 1;
+      renderCart();
+    }
+
+    function removeFromCart(name) {
+      if (!cart[name]) return;
+      cart[name] -= 1;
+      if (cart[name] <= 0) delete cart[name];
+      renderCart();
+    }
+
+    function getTotalCount() {
+      var count = 0;
+      for (var name in cart) count += cart[name];
+      return count;
+    }
+
+    function getTotalPrice() {
+      var total = 0;
+      for (var name in cart) total += cart[name] * prices[name];
+      return total;
+    }
+
+    function renderCart() {
+      var totalCount = getTotalCount();
+      var totalPrice = getTotalPrice();
+
+      // تحديث الشريط تحت
+      var cartBar = document.getElementById('cartBar');
+      document.getElementById('cartCount').textContent = totalCount;
+      document.getElementById('cartBarTotal').textContent = totalPrice + ' ج.م';
+      cartBar.classList.toggle('visible', totalCount > 0);
+
+      // تحديث نافذة التفاصيل
+      var linesContainer = document.getElementById('cartLines');
+      var totalRow = document.getElementById('cartTotalRow');
+      var checkoutBtn = document.getElementById('checkoutBtn');
+
+      if (totalCount === 0) {
+        linesContainer.innerHTML = '<p class="cart-empty-msg">الطلب لسه فاضي. ضيف حاجة من المنيو!</p>';
+        totalRow.style.display = 'none';
+        checkoutBtn.style.display = 'none';
+        return;
+      }
+
+      var html = '';
+      for (var name in cart) {
+        var qty = cart[name];
+        var linePrice = prices[name] * qty;
+        html += '' +
+          '<div class="cart-line">' +
+            '<div>' +
+              '<p class="cart-line-name">' + name + '</p>' +
+              '<p class="cart-line-price">' + prices[name] + ' ج.م × ' + qty + ' = ' + linePrice + ' ج.م</p>' +
+            '</div>' +
+            '<div class="cart-line-qty">' +
+              '<button onclick="removeFromCart(\'' + name + '\')">−</button>' +
+              '<span>' + qty + '</span>' +
+              '<button onclick="addToCart(\'' + name + '\')">+</button>' +
+            '</div>' +
+          '</div>';
+      }
+      linesContainer.innerHTML = html;
+      totalRow.style.display = 'flex';
+      document.getElementById('cartModalTotal').textContent = totalPrice + ' ج.م';
+      checkoutBtn.style.display = 'block';
+    }
+
+    // فتح وقفل نافذة الطلب
+    document.getElementById('cartBar').addEventListener('click', function () {
+      document.getElementById('cartOverlay').classList.add('visible');
+    });
+    document.getElementById('closeCartBtn').addEventListener('click', function () {
+      document.getElementById('cartOverlay').classList.remove('visible');
+    });
+    document.getElementById('cartOverlay').addEventListener('click', function () {
+      document.getElementById('cartOverlay').classList.remove('visible');
+    });
+
+    // تأكيد الطلب (تجريبي - تقدر تغيره بعدين لربطه بواتساب أو غيره)
+    document.getElementById('checkoutBtn').addEventListener('click', function () {
+      alert('تم تأكيد طلبك! الإجمالي: ' + getTotalPrice() + ' ج.م. شكراً لطلبك من Adam\'s Restaurant 🎉');
+      cart = {};
+      renderCart();
+      document.getElementById('cartOverlay').classList.remove('visible');
+    });
+
+    renderCart();
+  </script>
 
 </body>
 </html>
