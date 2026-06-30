@@ -238,6 +238,35 @@
     min-height: 38px;
   }
 
+  .size-pills {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+  }
+
+  .size-pill {
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .size-pill:hover {
+    border-color: var(--flame);
+  }
+
+  .size-pill.active {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
   .menu-card-bottom {
     display: flex;
     align-items: center;
@@ -527,12 +556,13 @@
     <h2 class="section-title" id="pizza">🍕 بيتزا</h2>
     <div class="menu-grid">
 
-      <div class="menu-card" data-name="بيتزا بيبروني" data-price="180">
+      <div class="menu-card" data-name="بيتزا بيبروني" data-sizes='{"S":130,"M":180,"L":230}'>
         <span class="menu-tag">الأكتر طلباً</span>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1506354666786-959d6d497f1a?w=400&h=300&fit=crop" alt="بيتزا بيبروني">
         <div class="menu-card-body">
           <h3 class="menu-card-name">بيتزا بيبروني</h3>
           <p class="menu-card-desc">صوص طماطم مركز، جبنة موزاريلا، شرائح بيبروني حارة</p>
+          <div class="size-pills" data-labels='{"S":"صغير","M":"وسط","L":"كبير"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">180 ج.م</span>
@@ -540,11 +570,12 @@
         </div>
       </div>
 
-      <div class="menu-card" data-name="بيتزا خضار" data-price="150">
+      <div class="menu-card" data-name="بيتزا خضار" data-sizes='{"S":110,"M":150,"L":190}'>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1551978129-b73f45d132eb?w=400&h=300&fit=crop" alt="بيتزا خضار">
         <div class="menu-card-body">
           <h3 class="menu-card-name">بيتزا خضار</h3>
           <p class="menu-card-desc">فلفل ألوان، فطر، زيتون، ذرة، جبنة موزاريلا</p>
+          <div class="size-pills" data-labels='{"S":"صغير","M":"وسط","L":"كبير"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">150 ج.م</span>
@@ -552,11 +583,12 @@
         </div>
       </div>
 
-      <div class="menu-card" data-name="بيتزا فور تشيز" data-price="195">
+      <div class="menu-card" data-name="بيتزا فور تشيز" data-sizes='{"S":145,"M":195,"L":245}'>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop" alt="بيتزا فور تشيز">
         <div class="menu-card-body">
           <h3 class="menu-card-name">بيتزا فور تشيز</h3>
           <p class="menu-card-desc">موزاريلا، شيدر، بارميزان، جبنة زرقاء</p>
+          <div class="size-pills" data-labels='{"S":"صغير","M":"وسط","L":"كبير"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">195 ج.م</span>
@@ -564,12 +596,13 @@
         </div>
       </div>
 
-      <div class="menu-card" data-name="بيتزا سوبر سوبريم" data-price="210">
+      <div class="menu-card" data-name="بيتزا سوبر سوبريم" data-sizes='{"S":160,"M":210,"L":260}'>
         <span class="menu-tag">جديد</span>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1566843972142-a7fcb70de55a?w=400&h=300&fit=crop" alt="بيتزا سوبر سوبريم">
         <div class="menu-card-body">
           <h3 class="menu-card-name">بيتزا سوبر سوبريم</h3>
           <p class="menu-card-desc">لحم مفروم، سجق، فلفل، بصل، زيتون، موزاريلا</p>
+          <div class="size-pills" data-labels='{"S":"صغير","M":"وسط","L":"كبير"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">210 ج.م</span>
@@ -583,11 +616,12 @@
     <h2 class="section-title" id="burger">🍔 برجر</h2>
     <div class="menu-grid">
 
-      <div class="menu-card" data-name="كلاسيك تشيز برجر" data-price="110">
+      <div class="menu-card" data-name="كلاسيك تشيز برجر" data-sizes='{"Single":110,"Double":150,"Triple":190}'>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1564849012987-56a988d14596?w=400&h=300&fit=crop" alt="كلاسيك تشيز برجر">
         <div class="menu-card-body">
           <h3 class="menu-card-name">كلاسيك تشيز برجر</h3>
           <p class="menu-card-desc">قرص لحم 150ج، جبنة شيدر، خس، طماطم، صوص خاص</p>
+          <div class="size-pills" data-labels='{"Single":"سينجل","Double":"دبل","Triple":"تريبل"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">110 ج.م</span>
@@ -595,12 +629,13 @@
         </div>
       </div>
 
-      <div class="menu-card" data-name="سبايسي برجر" data-price="125">
+      <div class="menu-card" data-name="سبايسي برجر" data-sizes='{"Single":125,"Double":165,"Triple":205}'>
         <span class="menu-tag">حار 🔥</span>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1606131731446-5568d87113aa?w=400&h=300&fit=crop" alt="سبايسي برجر">
         <div class="menu-card-body">
           <h3 class="menu-card-name">سبايسي برجر</h3>
           <p class="menu-card-desc">قرص لحم متبل، جبنة بيبر جاك، صوص هاريسا حار</p>
+          <div class="size-pills" data-labels='{"Single":"سينجل","Double":"دبل","Triple":"تريبل"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">125 ج.م</span>
@@ -608,24 +643,26 @@
         </div>
       </div>
 
-      <div class="menu-card" data-name="دبل ستاك برجر" data-price="160">
+      <div class="menu-card" data-name="دبل ستاك برجر" data-sizes='{"Single":120,"Double":160,"Triple":200}'>
         <span class="menu-tag">الأكتر طلباً</span>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=300&fit=crop" alt="دبل ستاك برجر">
         <div class="menu-card-body">
           <h3 class="menu-card-name">دبل ستاك برجر</h3>
           <p class="menu-card-desc">قرصين لحم، دبل جبنة، بصل مكرمل، صوص باربيكيو</p>
+          <div class="size-pills" data-labels='{"Single":"سينجل","Double":"دبل","Triple":"تريبل"}'></div>
         </div>
         <div class="menu-card-bottom">
-          <span class="menu-card-price">160 ج.م</span>
+          <span class="menu-card-price">120 ج.م</span>
           <button class="add-btn">إضافة</button>
         </div>
       </div>
 
-      <div class="menu-card" data-name="تشيكن كرسبي برجر" data-price="120">
+      <div class="menu-card" data-name="تشيكن كرسبي برجر" data-sizes='{"Single":120,"Double":155,"Triple":190}'>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=300&fit=crop" alt="تشيكن كرسبي برجر">
         <div class="menu-card-body">
           <h3 class="menu-card-name">تشيكن كرسبي برجر</h3>
           <p class="menu-card-desc">فراخ مقرمشة، كول سلو، مايونيز ثوم</p>
+          <div class="size-pills" data-labels='{"Single":"سينجل","Double":"دبل","Triple":"تريبل"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">120 ج.م</span>
@@ -639,11 +676,12 @@
     <h2 class="section-title" id="sides">🍟 سايدز</h2>
     <div class="menu-grid">
 
-      <div class="menu-card" data-name="بطاطس كلاسيك" data-price="55">
+      <div class="menu-card" data-name="بطاطس كلاسيك" data-sizes='{"Basic":55,"Family":95}'>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop" alt="بطاطس كلاسيك">
         <div class="menu-card-body">
           <h3 class="menu-card-name">بطاطس كلاسيك</h3>
           <p class="menu-card-desc">بطاطس مقرمشة مع رشة ملح وبهارات خاصة</p>
+          <div class="size-pills" data-labels='{"Basic":"عادي","Family":"فاميلي"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">55 ج.م</span>
@@ -651,11 +689,12 @@
         </div>
       </div>
 
-      <div class="menu-card" data-name="بطاطس بيري بيري" data-price="65">
+      <div class="menu-card" data-name="بطاطس بيري بيري" data-sizes='{"Basic":65,"Family":110}'>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1639024471283-03518883512d?w=400&h=300&fit=crop" alt="بطاطس بيري بيري">
         <div class="menu-card-body">
           <h3 class="menu-card-name">بطاطس بيري بيري</h3>
           <p class="menu-card-desc">بطاطس متبلة بصوص بيري بيري الحار</p>
+          <div class="size-pills" data-labels='{"Basic":"عادي","Family":"فاميلي"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">65 ج.م</span>
@@ -663,11 +702,12 @@
         </div>
       </div>
 
-      <div class="menu-card" data-name="أونيون رينجز" data-price="70">
+      <div class="menu-card" data-name="أونيون رينجز" data-sizes='{"Basic":70,"Family":115}'>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1630825533949-74f62f54553a?w=400&h=300&fit=crop" alt="أونيون رينجز">
         <div class="menu-card-body">
           <h3 class="menu-card-name">أونيون رينجز</h3>
           <p class="menu-card-desc">حلقات بصل مقرمشة مع صوص رانش</p>
+          <div class="size-pills" data-labels='{"Basic":"عادي","Family":"فاميلي"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">70 ج.م</span>
@@ -675,11 +715,12 @@
         </div>
       </div>
 
-      <div class="menu-card" data-name="ناجتس فراخ (6 قطع)" data-price="85">
+      <div class="menu-card" data-name="ناجتس فراخ" data-sizes='{"Basic":85,"Family":150}'>
         <img class="menu-card-img" src="https://images.unsplash.com/photo-1751698106460-80ed4d165984?w=400&h=300&fit=crop" alt="ناجتس فراخ">
         <div class="menu-card-body">
-          <h3 class="menu-card-name">ناجتس فراخ (6 قطع)</h3>
-          <p class="menu-card-desc">ناجتس فراخ مقرمش مع صوص باربيكيو</p>
+          <h3 class="menu-card-name">ناجتس فراخ</h3>
+          <p class="menu-card-desc">ناجتس فراخ مقرمش مع صوص باربيكيو (عادي 6 قطع / فاميلي 12 قطعة)</p>
+          <div class="size-pills" data-labels='{"Basic":"عادي","Family":"فاميلي"}'></div>
         </div>
         <div class="menu-card-bottom">
           <span class="menu-card-price">85 ج.م</span>
@@ -790,9 +831,9 @@
     Adam's Restaurant © 2026 — كل الحقوق محفوظة
   </footer>
   <script>
-    // الكارت بيتخزن هنا: object فيه اسم الصنف كـ key، وعدد القطع كـ value
+    // الكارت بيتخزن هنا: object فيه "اسم الصنف (السايز)" كـ key، وعدد القطع كـ value
     var cart = {};
-    // عشان نعرف سعر كل صنف برقمه، نعمل object تاني فيه الاسم والسعر
+    // عشان نعرف سعر كل صنف+سايز، نعمل object تاني فيه المفتاح والسعر
     var prices = {};
 
     // نجيب كل الكروت في الصفحة
@@ -800,20 +841,75 @@
 
     cards.forEach(function (card) {
       var name = card.getAttribute('data-name');
-      var price = parseInt(card.getAttribute('data-price'), 10);
-      prices[name] = price;
-
+      var sizesAttr = card.getAttribute('data-sizes');
+      var simplePrice = card.getAttribute('data-price');
+      var priceLabel = card.querySelector('.menu-card-price');
       var btn = card.querySelector('.add-btn');
-      btn.addEventListener('click', function () {
-        addToCart(name);
-        // تأثير بصري بسيط لما تدوس "إضافة"
-        btn.classList.add('added');
-        btn.textContent = 'تمت ✓';
-        setTimeout(function () {
-          btn.classList.remove('added');
-          btn.textContent = 'إضافة';
-        }, 700);
-      });
+
+      if (sizesAttr) {
+        // ---------- صنف بيه أحجام متعددة ----------
+        var sizes = JSON.parse(sizesAttr);
+        var labelsAttr = card.querySelector('.size-pills').getAttribute('data-labels');
+        var labels = labelsAttr ? JSON.parse(labelsAttr) : {};
+        var sizeKeys = Object.keys(sizes);
+        var selectedSize = sizeKeys[0]; // السايز الافتراضي هو أول واحد في القايمة
+
+        // نسجل سعر كل سايز في prices بمفتاح "اسم الصنف (اسم السايز)"
+        sizeKeys.forEach(function (key) {
+          var fullName = name + ' (' + (labels[key] || key) + ')';
+          prices[fullName] = sizes[key];
+        });
+
+        // نبني أزرار اختيار السايز (pills)
+        var pillsContainer = card.querySelector('.size-pills');
+        sizeKeys.forEach(function (key) {
+          var pill = document.createElement('button');
+          pill.type = 'button';
+          pill.className = 'size-pill' + (key === selectedSize ? ' active' : '');
+          pill.textContent = labels[key] || key;
+          pill.setAttribute('data-size-key', key);
+          pill.addEventListener('click', function () {
+            selectedSize = key;
+            // نحدث شكل الأزرار
+            pillsContainer.querySelectorAll('.size-pill').forEach(function (p) {
+              p.classList.remove('active');
+            });
+            pill.classList.add('active');
+            // نحدث السعر المعروض فورًا
+            priceLabel.textContent = sizes[selectedSize] + ' ج.م';
+          });
+          pillsContainer.appendChild(pill);
+        });
+
+        // السعر المعروض الافتراضي
+        priceLabel.textContent = sizes[selectedSize] + ' ج.م';
+
+        btn.addEventListener('click', function () {
+          var fullName = name + ' (' + (labels[selectedSize] || selectedSize) + ')';
+          addToCart(fullName);
+          btn.classList.add('added');
+          btn.textContent = 'تمت ✓';
+          setTimeout(function () {
+            btn.classList.remove('added');
+            btn.textContent = 'إضافة';
+          }, 700);
+        });
+
+      } else {
+        // ---------- صنف بسعر ثابت (زي المشروبات) ----------
+        var price = parseInt(simplePrice, 10);
+        prices[name] = price;
+
+        btn.addEventListener('click', function () {
+          addToCart(name);
+          btn.classList.add('added');
+          btn.textContent = 'تمت ✓';
+          setTimeout(function () {
+            btn.classList.remove('added');
+            btn.textContent = 'إضافة';
+          }, 700);
+        });
+      }
     });
 
     function addToCart(name) {
