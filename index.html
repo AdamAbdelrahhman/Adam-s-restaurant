@@ -1024,10 +1024,10 @@
       var waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(msg);
       window.open(waUrl, '_blank');
 
-      cart = {};
-      notesInput.value = '';
-      renderCart();
-      document.getElementById('cartOverlay').classList.remove('visible');
+      // ريسيت الصفحة بالكامل
+      setTimeout(function () {
+        window.location.reload();
+      }, 500);
     });
 
     renderCart();
