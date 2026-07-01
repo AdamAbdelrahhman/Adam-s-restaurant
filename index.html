@@ -1006,8 +1006,24 @@
       }
       var notesInput = document.getElementById('cartNotes');
       var notes = notesInput.value.trim();
-      var notesMsg = notes ? ('\nملاحظات: ' + notes) : '';
-      alert('تم تأكيد طلبك! طاولة رقم ' + tableNumber + '. الإجمالي: ' + getTotalPrice() + ' ج.م.' + notesMsg + '\nشكراً لطلبك من Adam\'s Restaurant 🎉');
+
+      // بناء رسالة الواتساب
+      var msg = '🧾 طلب جديد - طاولة رقم ' + tableNumber + '\n\n';
+      Object.keys(cart).forEach(function (name) {
+        var qty = cart[name];
+        var price = prices[name];
+        msg += '• ' + name + ' × ' + qty + ' - ' + (price * qty) + ' ج.م\n';
+      });
+      msg += '\n💰 الإجمالي: ' + getTotalPrice() + ' ج.م';
+      if (notes) {
+        msg += '\n📝 ملاحظات: ' + notes;
+      }
+
+      // فتح واتساب مع الرسالة الجاهزة
+      var waNumber = '201118751424';
+      var waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(msg);
+      window.open(waUrl, '_blank');
+
       cart = {};
       notesInput.value = '';
       renderCart();
